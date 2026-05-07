@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamy Expedition | Phạm Thị Mai Chi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Dancing+Script:wght@700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-pink: #ff0066;
+            --vibrant-pink: #ff4d94;
+            --neon-pink: #ff00ff;
+            --soft-pink: #fff0f5;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --text-main: #4a001e;
+            --transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-main); background: #fff; overflow-x: hidden; }
+
+        /* --- BACKGROUND ANIMATION --- */
+        .background-gradient {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffeef8 50%, #fff0f5 100%);
+            background-size: 400% 400%; animation: gradientShift 15s ease infinite;
+        }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        /* --- CÁC ĐỒ HỌA NEON & CUTE --- */
+        .neon-heart {
+            position: fixed; color: var(--neon-pink); font-size: 20px;
+            text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+            z-index: -1; animation: floatHeart 6s infinite ease-in-out; opacity: 0.6;
+        }
+        @keyframes floatHeart { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-50px) rotate(20deg); } }
+
+        .star {
+            position: fixed; color: #ffd700; font-size: 15px; z-index: -1;
+            animation: twinkle 2s infinite alternate;
+        }
+        @keyframes twinkle { from { opacity: 0.3; transform: scale(0.8); } to { opacity: 1; transform: scale(1.2); } }
+
+        .hugging-bear {
+            position: fixed; bottom: 20px; left: 20px; font-size: 50px; 
+            z-index: 100; filter: drop-shadow(0 0 10px rgba(255,0,102,0.3));
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 5%; position: sticky; top: 0; z-index: 1000;
+            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--neon-pink);
+        }
+        .nav-links { display: flex; gap: 15px; }
+        .nav-btn {
+            padding: 10px 20px; border-radius: 20px; text-decoration: none;
+            color: var(--text-main); font-weight: 800; transition: var(--transition);
+        }
+        .nav-btn:hover { background: var(--primary-pink); color: white; }
+
+        /* --- SECTION 1: BASE CAMP (CV) --- */
+        section { min-height: 100vh; padding: 100px 10%; display: flex; align-items: center; justify-content: center; }
+        
+        .cv-card {
+            background: var(--glass-bg); border-radius: 40px; padding: 50px;
+            display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px;
+            box-shadow: 0 30px 60px rgba(255, 0, 102, 0.15); border: 2px solid white;
+        }
+
+        .photo-frame {
+            background: #ffe4e1; border-radius: 30px; border: 8px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); transform: rotate(-3deg);
+            display: flex; align-items: center; justify-content: center; aspect-ratio: 3/4;
+        }
+
+        .title-neon {
+            font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-pink), var(--neon-pink));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        /* --- SECTION 2: PROJECT TRAIL (6 MỤC) --- */
+        .project-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px; width: 100%;
+        }
+        .v4-card {
+            background: white; padding: 40px; border-radius: 35px;
+            transition: var(--transition); border: 1px solid rgba(255, 0, 102, 0.1);
+        }
+        .v4-card:hover { transform: translateY(-15px); border-color: var(--neon-pink); box-shadow: 0 20px 40px rgba(255, 0, 102, 0.2); }
+        .v4-icon { font-size: 2.5rem; color: var(--primary-pink); margin-bottom: 20px; }
+
+        /* --- SECTION 3: THE SUMMIT (SUMMARY) --- */
+        .final-grade {
+            background: white; padding: 50px; border-radius: 40px; width: 100%;
+            display: flex; align-items: center; gap: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+        }
+        .grade-circle {
+            width: 130px; height: 130px; border: 5px solid var(--neon-pink);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; font-weight: 900; color: var(--primary-pink);
+        }
+
+        /* --- ANIMATIONS --- */
+        .reveal { opacity: 0; transform: translateY(50px); transition: 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div class="background-gradient"></div>
+
+    <i class="fa-solid fa-heart neon-heart" style="top: 15%; left: 10%; animation-delay: 0s;"></i>
+    <i class="fa-solid fa-heart neon-heart" style="top: 40%; left: 85%; animation-delay: 2s; font-size: 30px;"></i>
+    <i class="fa-solid fa-heart neon-heart" style="top: 70%; left: 15%; animation-delay: 4s;"></i>
+    <i class="fa-solid fa-star star" style="top: 20%; left: 80%;"></i>
+    <div class="star" style="top: 60%; left: 50%;">✦</div>
+
+    <div class="hugging-bear">🧸</div>
+
+    <header>
+        <div class="logo">
+            <div class="avatar-circle">MC</div>
+            <div class="logo-text"><h1>Mai Chi <span class="v-badge">K67</span></h1></div>
+        </div>
+        <nav class="nav-links">
+            <a href="#intro" class="nav-btn">Hành trình</a>
+            <a href="#projects" class="nav-btn">Bài tập</a>
+            <a href="#summary" class="nav-btn">Kết quả</a>
+        </nav>
+    </header>
+
+    <section id="intro">
+        <div class="cv-card reveal">
+            <div class="photo-frame">
+                <span style="color: #ff4d94; font-weight: 800;">Chèn ảnh Chi tại đây</span>
+            </div>
+            <div class="info-text">
+                <div class="badge-v4">BASE CAMP: NEU</div>
+                <h1 class="title-neon">Phạm Thị Mai Chi</h1>
+                <p style="font-size: 1.2rem; margin-bottom: 20px;">
+                    <i class="fa-solid fa-graduation-cap"></i> Khoa Ngôn ngữ & Văn hóa Anh <br>
+                    <i class="fa-solid fa-fingerprint"></i> Mã sinh viên: 25040042
+                </p>
+                <div class="quote-box">
+                    "Hành trình vạn dặm bắt đầu từ những dòng code màu hồng lấp lánh."
+                </div>
+                <p style="margin-top: 20px; color: var(--text-muted);">
+                    <strong>Mục tiêu:</strong> Khám phá sự kỳ diệu của ngôn ngữ và chinh phục các kỹ năng số đỉnh cao.
+                </p>
+                <a href="#projects" class="btn-primary-v4" style="text-decoration:none; margin-top:30px; display:inline-flex; align-items:center; gap:10px;">
+                    Xem nhật ký dự án <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" style="flex-direction: column;">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h2 style="font-size: 3rem; font-weight: 800;">Project Trails</h2>
+            <p style="font-family: 'Dancing Script'; font-size: 2rem; color: var(--primary-pink);">Dấu chân thám hiểm qua từng bài học</p>
+        </div>
+
+        <div class="project-grid">
+            <div class="v4-card reveal">
+                <i class="fa-solid fa-laptop-heart v4-icon"></i>
+                <div class="v4-title"><span>Bài 01</span><h3>Thiết bị số</h3></div>
+                <p class="v4-analysis">Tìm hiểu về các thiết bị ngoại vi hỗ trợ học tập.</p>
+                <div class="v4-insight">Thách thức: Ghi nhớ các thông số kỹ thuật.</div>
+                <a href="#" class="btn-v4" style="margin-top:20px;">Upload File ↗</a>
+            </div>
+
+            <div class="v4-card reveal" style="transition-delay: 0.1s;">
+                <i class="fa-solid fa-magnifying-glass-location v4-icon"></i>
+                <div class="v4-title"><span>Bài 02</span><h3>Khai thác Dữ liệu</h3></div>
+                <p class="v4-analysis">Kỹ năng tìm kiếm và xử lý thông tin chuyên nghiệp.</p>
+                <div class="v4-insight">Tâm đắc: Cách lọc thông tin rác hiệu quả.</div>
+                <a href="#" class="btn-v4" style="margin-top:20px;">Upload File ↗</a>
+            </div>
+
+            <div class="v4-card reveal" style="transition-delay: 0.2s;">
+                <i class="fa-solid fa-wand-magic-sparkles v4-icon"></i>
+                <div class="v4-title"><span>Bài 03</span><h3>Trí tuệ nhân tạo</h3></div>
+                <p class="v4-analysis">Ứng dụng AI vào việc học ngôn ngữ và nghiên cứu.</p>
+                <div class="v4-insight">Khám phá: AI giúp dịch thuật tự nhiên hơn.</div>
+                <a href="#" class="btn-v4" style="margin-top:20px;">Upload File ↗</a>
+            </div>
+
+            <div class="v4-card reveal">
+                <i class="fa-solid fa-comments-dollar v4-icon"></i>
+                <div class="v4-title"><span>Bài 04</span><h3>Giao tiếp số</h3></div>
+                <p class="v4-analysis">Hợp tác và làm việc nhóm trong môi trường ảo.</p>
+                <div class="v4-insight">Kỹ năng: Quản lý dự án nhóm qua Cloud.</div>
+                <a href="#" class="btn-v4" style="margin-top:20px;">Upload File ↗</a>
+            </div>
+
+            <div class="v4-card reveal">
+                <i class="fa-solid fa-palette v4-icon"></i>
+                <div class="v4-title"><span>Bài 05</span><h3>Sáng tạo Nội dung</h3></div>
+                <p class="v4-analysis">Thiết kế visual và xây dựng kịch bản truyền thông.</p>
+                <div class="v4-insight">Vẻ đẹp: Tự tay thiết kế những hình ảnh Aesthetic.</div>
+                <a href="#" class="btn-v4" style="margin-top:20px;">Upload File ↗</a>
+            </div>
+
+            <div class="v4-card reveal">
+                <i class="fa-solid fa-user-shield v4-icon"></i>
+                <div class="v4-title"><span>Bài 06</span><h3>An toàn học thuật</h3></div>
+                <p class="v4-analysis">Bảo mật thông tin và đạo đức trong không gian số.</p>
+                <div class="v4-insight">Ghi nhớ: Luôn trích dẫn nguồn đầy đủ.</div>
+                <a href="#" class="btn-v4" style="margin-top:20px;">Upload File ↗</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="summary">
+        <div class="summary-v4 reveal">
+            <div class="summary-header-v4">
+                <h2 class="gradient-text">Journey Summary</h2>
+                <p>Nhìn lại chặng đường thám hiểm kỹ năng số</p>
+            </div>
+            
+            <div class="final-grade">
+                <div class="grade-circle">
+                    <div>
+                        <div class="grade-label">DỰ KIẾN</div>
+                        <div class="grade-score">A+</div>
+                    </div>
+                </div>
+                <div class="grade-text">
+                    <h4>Về đích rạng rỡ!</h4>
+                    <p>Hành trình xây dựng Portfolio này đã giúp Chi làm chủ được GitHub và tư duy thiết kế Web hiện đại. 💖</p>
+                </div>
+            </div>
+
+            <div class="plan-cards-v4" style="margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="p-card">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                    <h4>Tâm đắc</h4>
+                    <p>Giao diện Neon Pink cực kỳ cá tính và đầy đủ chức năng.</p>
+                </div>
+                <div class="p-card">
+                    <i class="fa-solid fa-bolt"></i>
+                    <h4>Thách thức</h4>
+                    <p>Học cách điều khiển các dòng code thám hiểm khó nhằn.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-v4">
+        <p>© 2026 Designed by Mai Chi | Dreamy Expedition</p>
+        <div class="footer-icons">
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-github"></i>
+            <i class="fa-brands fa-tiktok"></i>
+        </div>
+    </footer>
+
+    <script>
+        // Hiệu ứng hiện nội dung khi cuộn (Scroll Reveal)
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+</body>
+</html>
